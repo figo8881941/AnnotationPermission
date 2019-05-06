@@ -1,7 +1,9 @@
-package com.duoduo.annotationpermission;
+package com.duoduo.annotationpermission.simple;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.duoduo.annotationpermission.R;
 
 public class MainActivity extends AppCompatActivity {
 
