@@ -5,7 +5,7 @@ AnnotationPermission
 1.Config the AspectJ plugin
 
 * Add AspectJ dependency in the project build.gradle file
-```groovy
+```gradle
     buildscript {
         repositories {
             google()
@@ -19,7 +19,7 @@ AnnotationPermission
     }
 ```
 * Apply AspectJ plugin in the app module(the application module) build.gradle file
-```groovy
+```gradle
 apply plugin: 'com.android.application'
 //aspectj plugin
 apply plugin: 'android-aspectjx'
@@ -43,7 +43,7 @@ android {
 3.Add the annotation in your code
 
 4.Config the Proguard
-```groovy
+```gradle
 #Keep Annotation
 -keepattributes *Annotation*
 -keep class * extends java.lang.annotation.Annotation {*;}
