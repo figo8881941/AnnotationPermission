@@ -59,6 +59,31 @@ api 'com.duoduo:annotationpermission:1.0.1'
 ```
 3.Add the annotation in your code
 -------
+* Add the @AnnotationPermission to the class which you need to request permissions
+* Add the @NeedPermission to the method which you need to request permissions
+```java
+@AnnotationPermission
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Button button = (Button) findViewById(R.id.need_permission);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                needPermission();
+            }
+        });
+    }
+
+    @NeedPermission(permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE})
+    private void needPermission() {
+        Toast.makeText(getApplicationContext(), "need permission", Toast.LENGTH_LONG).show();
+    }
+}
+```
 4.Config the Proguard
 -------
 ```progurad
