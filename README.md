@@ -43,7 +43,7 @@ android {
 3.Add the annotation in your code
 
 4.Config the Proguard
-```gradle
+```progurad
 #Keep Annotation
 -keepattributes *Annotation*
 -keep class * extends java.lang.annotation.Annotation {*;}
