@@ -1,5 +1,19 @@
 apply plugin: 'com.android.library'
 
+//添加
+apply plugin: 'com.novoda.bintray-release'
+
+//添加
+publish {
+    userOrg = 'duoduocompanay'//组织名
+    repoName = 'duoduo'//Maven仓库名
+    groupId = 'com.duoduo'//jcenter上的路径
+    artifactId = 'annotationpermission'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'AnnotationPermission'//描述，不重要
+    website = ''//网站，不重要；尽量模拟github上的地址
+}
+
 android {
     compileSdkVersion 28
 

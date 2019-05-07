@@ -11,6 +11,12 @@ buildscript {
         
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        //aspectj
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
+
+        //JCenter发布插件
+        classpath 'com.novoda:bintray-release:+'
     }
 }
 
@@ -19,6 +25,15 @@ allprojects {
         google()
         jcenter()
         
+    }
+
+    //发布JCenter，如果moudle中的工具上有中文注释，需要加上
+    tasks.withType(Javadoc) {
+        options{
+            encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
     }
 }
 
