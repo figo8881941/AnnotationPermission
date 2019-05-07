@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "need permission", Toast.LENGTH_LONG).show();
     }
 
-    @OnShowRationable
-    private void onShowRationable(ShowRationaleEntity entity) {
-        Toast.makeText(getApplicationContext(), "showRationable", Toast.LENGTH_LONG).show();
-    }
+//    @OnShowRationable
+//    private void onShowRationable(ShowRationaleEntity entity) {
+//        Toast.makeText(getApplicationContext(), "showRationable", Toast.LENGTH_LONG).show();
+//    }
 
     @OnDeniedPermission
     private void onDeniedPermission(DeniedPermissionEntity entity) {
