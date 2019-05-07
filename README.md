@@ -40,6 +40,7 @@ android {
 }
 ```
 2.Config the AnnotationPermission
+-------
 * Add the repository config in the project build.gradle file
 ```gradle
 allprojects {
@@ -57,8 +58,9 @@ allprojects {
 api 'com.duoduo:annotationpermission:1.0.1'
 ```
 3.Add the annotation in your code
-
+-------
 4.Config the Proguard
+-------
 ```progurad
 #Keep Annotation
 -keepattributes *Annotation*
