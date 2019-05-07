@@ -4,6 +4,7 @@ AnnotationPermission
 # How to use it?
 1.Config the AspectJ plugin
 (1)Add AspectJ dependency in the project build.gradle
+```groovy
     buildscript {
         repositories {
             google()
@@ -15,7 +16,7 @@ AnnotationPermission
             classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
         }
     }
-
+```
 2.Config the AnnotationPermission
 
 3.Add the annotation in your code
