@@ -43,3 +43,19 @@ android {
 3.Add the annotation in your code
 
 4.Config the Proguard
+```groovy
+# Keep Annotation
+-keepattributes *Annotation*
+-keep class * extends java.lang.annotation.Annotation {*;}
+
+# Keep AndPermission
+-dontwarn com.yanzhenjie.permission.**
+
+# Keep AnnotationPermission
+-keep @com.duoduo.annotationpermission.library.annotation.AnnotationPermission class * {*;}
+-keepclassmembers class * {
+    @com.duoduo.annotationpermission.library.annotation.NeedPermission <methods>;
+    @com.duoduo.annotationpermission.library.annotation.OnDeniedPermission <methods>;
+    @com.duoduo.annotationpermission.library.annotation.OnShowRationable <methods>;
+}
+```
