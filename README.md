@@ -3,8 +3,9 @@ AnnotationPermission
 
 # How to use it?
 1.Config the AspectJ plugin
-```groovy
+
 (1)Add AspectJ dependency in the project build.gradle
+```groovy
     buildscript {
         repositories {
             google()
