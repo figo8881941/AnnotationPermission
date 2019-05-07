@@ -39,7 +39,17 @@ android {
 }
 ```
 2.Config the AnnotationPermission
-
+* Add the repository config in the project build.gradle file
+```gradle
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        //AnnotationPermission
+        maven { url "https://dl.bintray.com/duoduocompanay/duoduo" }
+    }
+}
+```
 3.Add the annotation in your code
 
 4.Config the Proguard
