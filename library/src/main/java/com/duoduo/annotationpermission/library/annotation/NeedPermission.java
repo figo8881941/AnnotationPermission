@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 /**
- * 权限检查注解
+ * 权限请求注解
  */
 public @interface NeedPermission {
     /**
@@ -39,4 +39,14 @@ public @interface NeedPermission {
      * @return
      */
     boolean once() default false;
+
+    /**
+     * 是否有获得授权后的回调处理方法
+     * 在默认的情况下，如果获得了授权，应该继续执行原来的方法
+     * 如果该设置返回true，则会查看是否有@OnGrantedPermission标注的方法
+     * 如果有，就回调该方法，不继续执行原来的方法
+     * 如果没有，就继续执行原来的方法
+     * @return
+     */
+    boolean hasGrantedCallback() default false;
 }

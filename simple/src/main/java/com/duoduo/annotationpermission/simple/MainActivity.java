@@ -11,8 +11,10 @@ import com.duoduo.annotationpermission.R;
 import com.duoduo.annotationpermission.library.annotation.AnnotationPermission;
 import com.duoduo.annotationpermission.library.annotation.NeedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnDeniedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnGrantedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnShowRationable;
 import com.duoduo.annotationpermission.library.entity.DeniedPermissionEntity;
+import com.duoduo.annotationpermission.library.entity.GrantedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.ShowRationaleEntity;
 
 @AnnotationPermission
@@ -33,15 +35,20 @@ public class MainActivity extends AppCompatActivity {
 
     @NeedPermission(permissions = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE})
+            Manifest.permission.READ_PHONE_STATE}, hasGrantedCallback = true, ignoreShowRationale = true)
     private void needPermission() {
         Toast.makeText(getApplicationContext(), "need permission", Toast.LENGTH_LONG).show();
     }
 
-//    @OnShowRationable
-//    private void onShowRationable(ShowRationaleEntity entity) {
-//        Toast.makeText(getApplicationContext(), "showRationable", Toast.LENGTH_LONG).show();
-//    }
+    @OnGrantedPermission
+    private void onGrantedPermission(GrantedPermissionEntity entity) {
+        Toast.makeText(getApplicationContext(), "onGrantedPermission", Toast.LENGTH_LONG).show();
+    }
+
+    @OnShowRationable
+    private void onShowRationable(ShowRationaleEntity entity) {
+        Toast.makeText(getApplicationContext(), "showRationable", Toast.LENGTH_LONG).show();
+    }
 
     @OnDeniedPermission
     private void onDeniedPermission(DeniedPermissionEntity entity) {

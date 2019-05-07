@@ -6,10 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 /**
- * AnnotationPermission
- * 用于标记使用AnnotationPermission的类
+ * 获得授权注解
  */
-public @interface AnnotationPermission {
+public @interface OnGrantedPermission {
 }

@@ -9,8 +9,10 @@ import com.duoduo.annotationpermission.library.IContextHolder;
 import com.duoduo.annotationpermission.library.PermissionUtils;
 import com.duoduo.annotationpermission.library.annotation.NeedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnDeniedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnGrantedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnShowRationable;
 import com.duoduo.annotationpermission.library.entity.DeniedPermissionEntity;
+import com.duoduo.annotationpermission.library.entity.GrantedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.ShowRationaleEntity;
 import com.duoduo.annotationpermission.library.utils.ReflectUtils;
 import com.yanzhenjie.permission.RequestExecutor;
@@ -32,6 +34,7 @@ import java.util.HashSet;
 @Aspect
 public class PermissionCheckAspectJ {
 
+    private static HashMap<Class, Method> classGrantedPermissionMethodCache = new HashMap<Class, Method>();
     private static HashMap<Class, Method> classDeniedPermissionMethodCache = new HashMap<Class, Method>();
     private static HashMap<Class, Method> classShowRationableMethodCache = new HashMap<Class, Method>();
     private static HashMap<Class, Field> classContextFieldCache = new HashMap<Class, Field>();
@@ -58,6 +61,7 @@ public class PermissionCheckAspectJ {
         final int requestCode = needPermission.requestCode();
         final boolean continueWhenDenied = needPermission.continueWhenDenied();
         final boolean once = needPermission.once();
+        final boolean hasGrantedCallback = needPermission.hasGrantedCallback();
 
         //处理只进行一次权限检查的方法
         if (once) {
@@ -84,11 +88,14 @@ public class PermissionCheckAspectJ {
         PermissionUtils.checkAndRequestPermission(context, new ICheckAndRequestPermissionListener() {
             @Override
             public void onGrantedPermission(String... permissions) {
-                //已授权，继续执行
-                try {
-                    joinPoint.proceed();
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+                //已授权
+                if (!hasGrantedCallback || !handleGrantedPermission(joinPoint, requestCode, permissions)) {
+                    //如果没有授权回调处理方法或者对应的方法没有处理成功，则继续执行原来的方法
+                    try {
+                        joinPoint.proceed();
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
                 }
             }
 
@@ -108,16 +115,9 @@ public class PermissionCheckAspectJ {
 
             @Override
             public void onShowRationale(RequestExecutor executor, String... permissions) {
-                if (ignoreShowRationale) {
-                    //如果忽略，直接再次申请权限
+                if (ignoreShowRationale || !handleShowRationable(joinPoint, requestCode, executor, permissions)) {
+                    //如果忽略或者是对应的处理方法没有处理成功，直接再次申请权限
                     executor.execute();
-                } else {
-                    //展示权限说明对话框
-                    boolean result = handleShowRationable(joinPoint, requestCode, executor, permissions);
-                    if (!result) {
-                        //如果没有处理成功，如没有定义对应的处理方法，就继续走权限申请逻辑
-                        executor.execute();
-                    }
                 }
             }
         }, permissons);
@@ -142,6 +142,58 @@ public class PermissionCheckAspectJ {
         synchronized (onceMethodRecord) {
             onceMethodRecord.add(targetMethod);
         }
+    }
+
+    /**
+     * 处理授权通过
+     *
+     * @param joinPoint
+     * @param permissions
+     */
+    private boolean handleGrantedPermission(ProceedingJoinPoint joinPoint, int requestCode
+            , String... permissions) {
+        boolean result = false;
+        try {
+            Object targetObject = joinPoint.getTarget();
+            Class targetObjectClass = targetObject.getClass();
+            Method method = getClassHandleGrantedPermissionMethod(targetObjectClass);
+            if (method != null) {
+                Class[] parameterTypes = method.getParameterTypes();
+                if (parameterTypes == null || parameterTypes.length != 1 ||
+                        !parameterTypes[0].equals(GrantedPermissionEntity.class)) {
+                    return result;
+                }
+                method.setAccessible(true);
+                GrantedPermissionEntity entity = new GrantedPermissionEntity();
+                entity.setPermissions(permissions);
+                entity.setRequestCode(requestCode);
+                method.invoke(targetObject, entity);
+                result = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * 获取类处理授权通过的方法
+     *
+     * @param targetClass
+     * @return
+     */
+    private Method getClassHandleGrantedPermissionMethod(Class targetClass) {
+        Method method = null;
+        synchronized (classGrantedPermissionMethodCache) {
+            method = classGrantedPermissionMethodCache.get(targetClass);
+            if (method == null) {
+                method = ReflectUtils.getMethodByAnnotation(targetClass, OnGrantedPermission.class);
+                if (method != null) {
+                    classGrantedPermissionMethodCache.put(targetClass, method);
+                }
+            }
+        }
+        return method;
     }
 
     /**
