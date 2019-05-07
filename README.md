@@ -44,14 +44,14 @@ android {
 
 4.Config the Proguard
 ```groovy
-# Keep Annotation
+#Keep Annotation
 -keepattributes *Annotation*
 -keep class * extends java.lang.annotation.Annotation {*;}
 
-# Keep AndPermission
+#Keep AndPermission
 -dontwarn com.yanzhenjie.permission.**
 
-# Keep AnnotationPermission
+#Keep AnnotationPermission
 -keep @com.duoduo.annotationpermission.library.annotation.AnnotationPermission class * {*;}
 -keepclassmembers class * {
     @com.duoduo.annotationpermission.library.annotation.NeedPermission <methods>;
