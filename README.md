@@ -1,5 +1,5 @@
-AnnotationPermission
--------
+# AnnotationPermission
+
 AnnotationPermission
 
 # How to use it?
@@ -75,8 +75,7 @@ api 'com.duoduo:annotationpermission:1.0.1'
     @com.duoduo.annotationpermission.library.annotation.OnShowRationable <methods>;
 }
 ```
-License
--------
+# License
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
