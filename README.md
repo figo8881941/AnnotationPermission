@@ -4,7 +4,7 @@ AnnotationPermission
 
 # How to use it?
 1.Config the AspectJ plugin
-
+-------
 * Add AspectJ dependency in the project build.gradle file
 ```gradle
     buildscript {
