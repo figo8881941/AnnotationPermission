@@ -17,12 +17,12 @@ public class PermissionUtils {
 
     /**
      * 检查和申请权限的方法
+     *
      * @param context
-     * @param ignoreShowRationale 是否忽略showRationale
-     * @param listener 监听器
-     * @param permissions 请求权限
+     * @param listener            监听器
+     * @param permissions         请求权限
      */
-    public static void checkAndRequestPermission(final Context context, final boolean ignoreShowRationale, final ICheckAndRequestPermissionListener listener, final String... permissions) {
+    public static void checkAndRequestPermission(final Context context, final ICheckAndRequestPermissionListener listener, final String... permissions) {
         boolean hasPermissions = AndPermission.hasPermissions(context, permissions);
         if (hasPermissions) {
             //已经有权限
@@ -80,15 +80,10 @@ public class PermissionUtils {
             }).rationale(new Rationale<List<String>>() {
                 @Override
                 public void showRationale(Context context, List<String> data, RequestExecutor executor) {
-                    //向用户说明
-                    if (ignoreShowRationale) {
-                        //如果忽略，直接再次申请权限
-                        executor.execute();
-                    } else {
-                        if (listener != null) {
-                            listener.onShowRationale(executor, permissions);
-                        }
+                    if (listener != null) {
+                        listener.onShowRationale(executor, permissions);
                     }
+
                 }
             }).start();
         }

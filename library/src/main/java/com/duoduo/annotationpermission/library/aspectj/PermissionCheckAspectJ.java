@@ -7,8 +7,8 @@ import android.view.View;
 import com.duoduo.annotationpermission.library.ICheckAndRequestPermissionListener;
 import com.duoduo.annotationpermission.library.IContextHolder;
 import com.duoduo.annotationpermission.library.PermissionUtils;
-import com.duoduo.annotationpermission.library.annotation.OnDeniedPermission;
 import com.duoduo.annotationpermission.library.annotation.NeedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnDeniedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnShowRationable;
 import com.duoduo.annotationpermission.library.entity.DeniedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.ShowRationaleEntity;
@@ -54,7 +54,7 @@ public class PermissionCheckAspectJ {
         Method method = methodSignature.getMethod();
         NeedPermission needPermission = method.getAnnotation(NeedPermission.class);
         String[] permissons = needPermission.permissions();
-        boolean ignoreShowRationale = needPermission.ignoreShowRationale();
+        final boolean ignoreShowRationale = needPermission.ignoreShowRationale();
         final int requestCode = needPermission.requestCode();
         final boolean continueWhenDenied = needPermission.continueWhenDenied();
         final boolean once = needPermission.once();
@@ -81,7 +81,7 @@ public class PermissionCheckAspectJ {
         }
 
         //调用工具方法进行权限检查
-        PermissionUtils.checkAndRequestPermission(context, ignoreShowRationale, new ICheckAndRequestPermissionListener() {
+        PermissionUtils.checkAndRequestPermission(context, new ICheckAndRequestPermissionListener() {
             @Override
             public void onGrantedPermission(String... permissions) {
                 //已授权，继续执行
@@ -108,14 +108,24 @@ public class PermissionCheckAspectJ {
 
             @Override
             public void onShowRationale(RequestExecutor executor, String... permissions) {
-                //展示权限说明对话框
-                handleShowRationable(joinPoint, requestCode, executor, permissions);
+                if (ignoreShowRationale) {
+                    //如果忽略，直接再次申请权限
+                    executor.execute();
+                } else {
+                    //展示权限说明对话框
+                    boolean result = handleShowRationable(joinPoint, requestCode, executor, permissions);
+                    if (!result) {
+                        //如果没有处理成功，如没有定义对应的处理方法，就继续走权限申请逻辑
+                        executor.execute();
+                    }
+                }
             }
         }, permissons);
     }
 
     /**
      * 方法是否已经进行过一次权限检查
+     *
      * @param targetMethod
      * @return
      */
@@ -140,8 +150,9 @@ public class PermissionCheckAspectJ {
      * @param joinPoint
      * @param permissions
      */
-    private void handleDeniedPermission(ProceedingJoinPoint joinPoint, int requestCode
+    private boolean handleDeniedPermission(ProceedingJoinPoint joinPoint, int requestCode
             , String... permissions) {
+        boolean result = false;
         try {
             Object targetObject = joinPoint.getTarget();
             Class targetObjectClass = targetObject.getClass();
@@ -150,17 +161,19 @@ public class PermissionCheckAspectJ {
                 Class[] parameterTypes = method.getParameterTypes();
                 if (parameterTypes == null || parameterTypes.length != 1 ||
                         !parameterTypes[0].equals(DeniedPermissionEntity.class)) {
-                    return;
+                    return result;
                 }
                 method.setAccessible(true);
                 DeniedPermissionEntity entity = new DeniedPermissionEntity();
                 entity.setPermissions(permissions);
                 entity.setRequestCode(requestCode);
                 method.invoke(targetObject, entity);
+                result = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     /**
@@ -190,7 +203,8 @@ public class PermissionCheckAspectJ {
      * @param executor
      * @param permissions
      */
-    private void handleShowRationable(ProceedingJoinPoint joinPoint, int requestCode, RequestExecutor executor, String... permissions) {
+    private boolean handleShowRationable(ProceedingJoinPoint joinPoint, int requestCode, RequestExecutor executor, String... permissions) {
+        boolean result = false;
         try {
             Object targetObject = joinPoint.getTarget();
             Class targetObjectClass = targetObject.getClass();
@@ -199,7 +213,7 @@ public class PermissionCheckAspectJ {
                 Class[] parameterTypes = method.getParameterTypes();
                 if (parameterTypes == null || parameterTypes.length != 1 ||
                         !parameterTypes[0].equals(ShowRationaleEntity.class)) {
-                    return;
+                    return result;
                 }
                 method.setAccessible(true);
                 ShowRationaleEntity entity = new ShowRationaleEntity();
@@ -207,10 +221,12 @@ public class PermissionCheckAspectJ {
                 entity.setExecutor(executor);
                 entity.setRequestCode(requestCode);
                 method.invoke(targetObject, entity);
+                result = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     /**
