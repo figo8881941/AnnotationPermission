@@ -1,2 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.duoduo.annotationpermission.library" />
+    package="com.duoduo.annotationpermission.library">
+
+    <application>
+        <!-- InitContentProvider -->
+        <provider
+            android:authorities="${applicationId}.annotationpermission.init"
+            android:name=".InitContentProvider"
+            android:exported="false"
+            >
+        </provider>
+    </application>
+
+</manifest>
