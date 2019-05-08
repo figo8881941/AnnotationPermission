@@ -44,7 +44,7 @@ android {
 * Add the dependency config in the module build.gradle file
 ```gradle
 //AnnotationPermission
-api 'com.duoduo:annotationpermission:1.0.3'
+api 'com.duoduo:annotationpermission:1.0.4'
 ```
 3.Add the annotation in your code
 -------
@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
 -dontwarn com.yanzhenjie.permission.**
 
 #Keep AnnotationPermission
--keep @com.duoduo.annotationpermission.library.annotation.AnnotationPermission class * {*;}
+-keep @com.duoduo.annotationpermission.annotation.AnnotationPermission class * {*;}
 -keepclassmembers class * {
-    @com.duoduo.annotationpermission.library.annotation.NeedPermission <methods>;
-    @com.duoduo.annotationpermission.library.annotation.OnGrantedPermission <methods>;
-    @com.duoduo.annotationpermission.library.annotation.OnDeniedPermission <methods>;
-    @com.duoduo.annotationpermission.library.annotation.OnAlwaysDeniedPermission <methods>;
-    @com.duoduo.annotationpermission.library.annotation.OnShowRationable <methods>;
+    @com.duoduo.annotationpermission.annotation.NeedPermission <methods>;
+    @com.duoduo.annotationpermission.annotation.OnGrantedPermission <methods>;
+    @com.duoduo.annotationpermission.annotation.OnDeniedPermission <methods>;
+    @com.duoduo.annotationpermission.annotation.OnAlwaysDeniedPermission <methods>;
+    @com.duoduo.annotationpermission.annotation.OnShowRationable <methods>;
 }
 ```
 # License
