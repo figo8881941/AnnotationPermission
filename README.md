@@ -55,7 +55,7 @@ allprojects {
 * Add the dependency config in the module build.gradle file
 ```gradle
 //AnnotationPermission
-api 'com.duoduo:annotationpermission:1.0.1'
+api 'com.duoduo:annotationpermission:1.0.2'
 ```
 3.Add the annotation in your code
 -------
