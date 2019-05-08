@@ -41,21 +41,10 @@ android {
 ```
 2.Config the AnnotationPermission
 -------
-* Add the repository config in the project build.gradle file
-```gradle
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        //AnnotationPermission
-        maven { url "https://dl.bintray.com/duoduocompanay/duoduo" }
-    }
-}
-```
 * Add the dependency config in the module build.gradle file
 ```gradle
 //AnnotationPermission
-api 'com.duoduo:annotationpermission:1.0.2'
+api 'com.duoduo:annotationpermission:1.0.3'
 ```
 3.Add the annotation in your code
 -------
