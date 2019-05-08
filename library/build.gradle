@@ -37,6 +37,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(':annotation')
+
     implementation 'com.android.support:appcompat-v7:27.1.1'
 
     //AndPermission

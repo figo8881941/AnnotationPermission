@@ -1,4 +1,4 @@
-package com.duoduo.annotationpermission.library.annotation;
+package com.duoduo.annotationpermission.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
