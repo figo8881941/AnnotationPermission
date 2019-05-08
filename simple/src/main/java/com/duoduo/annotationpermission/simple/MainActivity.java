@@ -10,9 +10,11 @@ import android.widget.Toast;
 import com.duoduo.annotationpermission.R;
 import com.duoduo.annotationpermission.library.annotation.AnnotationPermission;
 import com.duoduo.annotationpermission.library.annotation.NeedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnAlwaysDeniedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnDeniedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnGrantedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnShowRationable;
+import com.duoduo.annotationpermission.library.entity.AlwaysDeniedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.DeniedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.GrantedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.ShowRationaleEntity;
@@ -35,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
     @NeedPermission(permissions = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE}, hasGrantedCallback = true, ignoreShowRationale = true)
+            Manifest.permission.READ_PHONE_STATE},
+            hasGrantedCallback = true,
+            ignoreShowRationale = true,
+            hasAlwaysDeniedCallback = true
+    )
     private void needPermission() {
         Toast.makeText(getApplicationContext(), "need permission", Toast.LENGTH_LONG).show();
     }
@@ -53,5 +59,10 @@ public class MainActivity extends AppCompatActivity {
     @OnDeniedPermission
     private void onDeniedPermission(DeniedPermissionEntity entity) {
         Toast.makeText(getApplicationContext(), "onDeniedPermission", Toast.LENGTH_LONG).show();
+    }
+
+    @OnAlwaysDeniedPermission
+    private void onAlwaysDeniedPermission(AlwaysDeniedPermissionEntity entity) {
+        Toast.makeText(getApplicationContext(), "onAlwaysDeniedPermission", Toast.LENGTH_LONG).show();
     }
 }

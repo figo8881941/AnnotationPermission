@@ -91,5 +91,6 @@
     @com.duoduo.annotationpermission.library.annotation.NeedPermission <methods>;
     @com.duoduo.annotationpermission.library.annotation.OnGrantedPermission <methods>;
     @com.duoduo.annotationpermission.library.annotation.OnDeniedPermission <methods>;
+    @com.duoduo.annotationpermission.library.annotation.OnAlwaysDeniedPermission <methods>;
     @com.duoduo.annotationpermission.library.annotation.OnShowRationable <methods>;
 }

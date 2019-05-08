@@ -49,4 +49,14 @@ public @interface NeedPermission {
      * @return
      */
     boolean hasGrantedCallback() default false;
+
+    /**
+     * 是否有拒绝授权并不再提示的回调处理方法
+     * 在默认的情况下，如果拒绝授权并不再提示，会跳转到应用设置界面
+     * 如果该设置返回true，则会查看是否有@OnAlwaysDeniedPermission标注的方法
+     * 如果有，就回调该方法，不继续执行默认的逻辑
+     * 如果没有，就继续执行默认的逻辑
+     * @return
+     */
+    boolean hasAlwaysDeniedCallback() default false;
 }

@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 /**
- * 授权拒绝注解
+ * 授权拒绝回调注解
  */
 public @interface OnDeniedPermission {
 }

@@ -1,5 +1,6 @@
 package com.duoduo.annotationpermission.library;
 
+import com.duoduo.annotationpermission.library.denied.AlwaysDeniedExecutor;
 import com.yanzhenjie.permission.RequestExecutor;
 
 /**
@@ -18,6 +19,12 @@ public interface ICheckAndRequestPermissionListener {
      * @param permissions
      */
     public void onDeniedPermission(final String... permissions);
+
+    /**
+     * 拒绝授权并不再提示的回调
+     * @param permissions
+     */
+    public void onAlwaysDeniedPermission(final AlwaysDeniedExecutor executor, final String... permissions);
 
     /**
      * 跟用户解释提示的回调

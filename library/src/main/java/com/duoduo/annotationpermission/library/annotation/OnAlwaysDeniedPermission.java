@@ -8,8 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 /**
- * 展示权限说明对话框回调注解
- * @NeedPermission 中ignoreShowRationale = false有效
+ * 授权不再提示回调注解
  */
-public @interface OnShowRationable {
+public @interface OnAlwaysDeniedPermission {
 }

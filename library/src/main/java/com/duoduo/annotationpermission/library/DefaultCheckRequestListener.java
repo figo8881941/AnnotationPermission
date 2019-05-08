@@ -1,5 +1,6 @@
 package com.duoduo.annotationpermission.library;
 
+import com.duoduo.annotationpermission.library.denied.AlwaysDeniedExecutor;
 import com.yanzhenjie.permission.RequestExecutor;
 
 /**
@@ -15,6 +16,12 @@ public class DefaultCheckRequestListener implements ICheckAndRequestPermissionLi
     public void onDeniedPermission(String... permissions) {
 
     }
+
+    @Override
+    public void onAlwaysDeniedPermission(AlwaysDeniedExecutor executor, String... permissions) {
+
+    }
+
 
     @Override
     public void onShowRationale(RequestExecutor executor, String... permissions) {
