@@ -1,9 +1,7 @@
 package com.duoduo.annotationpermission.library.aspectj;
 
-import com.duoduo.annotationpermission.library.annotation.OnGrantedPermission;
 import com.duoduo.annotationpermission.library.data.ClassInfoCache;
 import com.duoduo.annotationpermission.library.entity.GrantedPermissionEntity;
-import com.duoduo.annotationpermission.library.utils.ReflectUtils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
