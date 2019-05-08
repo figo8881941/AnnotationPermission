@@ -4,8 +4,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.view.View;
 
-import com.duoduo.annotationpermission.library.IContextHolder;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.lang.reflect.Field;

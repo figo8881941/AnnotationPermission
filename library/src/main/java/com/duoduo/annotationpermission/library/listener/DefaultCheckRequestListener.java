@@ -1,4 +1,4 @@
-package com.duoduo.annotationpermission.library;
+package com.duoduo.annotationpermission.library.listener;
 
 import com.duoduo.annotationpermission.library.denied.AlwaysDeniedExecutor;
 import com.yanzhenjie.permission.RequestExecutor;

@@ -1,4 +1,4 @@
-package com.duoduo.annotationpermission.library;
+package com.duoduo.annotationpermission.library.init;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

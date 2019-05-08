@@ -5,7 +5,7 @@
         <!-- InitContentProvider -->
         <provider
             android:authorities="${applicationId}.annotationpermission.init"
-            android:name=".InitContentProvider"
+            android:name=".init.InitContentProvider"
             android:exported="false"
             >
         </provider>

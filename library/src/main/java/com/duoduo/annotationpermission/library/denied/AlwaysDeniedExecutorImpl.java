@@ -2,7 +2,7 @@ package com.duoduo.annotationpermission.library.denied;
 
 import android.content.Context;
 
-import com.duoduo.annotationpermission.library.ICheckAndRequestPermissionListener;
+import com.duoduo.annotationpermission.library.listener.ICheckAndRequestPermissionListener;
 import com.duoduo.annotationpermission.library.utils.ListUtils;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Setting;

@@ -2,8 +2,8 @@ package com.duoduo.annotationpermission.library.aspectj;
 
 import android.content.Context;
 
-import com.duoduo.annotationpermission.library.ICheckAndRequestPermissionListener;
-import com.duoduo.annotationpermission.library.PermissionUtils;
+import com.duoduo.annotationpermission.library.listener.ICheckAndRequestPermissionListener;
+import com.duoduo.annotationpermission.library.utils.PermissionUtils;
 import com.duoduo.annotationpermission.library.annotation.NeedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnAlwaysDeniedPermission;
 import com.duoduo.annotationpermission.library.annotation.OnDeniedPermission;
