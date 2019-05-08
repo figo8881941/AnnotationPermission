@@ -28,7 +28,7 @@ public class PermissionCheckAspectJ {
 
     private final String TAG = "PermissionCheckAspectJ";
 
-    @Pointcut("execution(@com.duoduo.annotationpermission.library.annotation.NeedPermission * *(..))")
+    @Pointcut("execution(@com.duoduo.annotationpermission.annotation.NeedPermission * *(..))")
     public void needPermission() {
     }
 
