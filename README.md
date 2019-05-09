@@ -44,7 +44,7 @@ android {
 * Add the dependency config in the module build.gradle file
 ```gradle
 //AnnotationPermission
-api 'com.duoduo.annotationpermission:annotationpermission-library:1.0.3'
+api 'com.duoduo.annotationpermission:annotationpermission-library:1.0.5'
 ```
 3.Add the annotation in your code
 -------
