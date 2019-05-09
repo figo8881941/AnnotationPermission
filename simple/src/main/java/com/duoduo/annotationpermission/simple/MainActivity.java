@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.duoduo.annotationpermission.R;
-import com.duoduo.annotationpermission.annotation.AnnotationPermission;
-import com.duoduo.annotationpermission.annotation.NeedPermission;
-import com.duoduo.annotationpermission.annotation.OnAlwaysDeniedPermission;
-import com.duoduo.annotationpermission.annotation.OnDeniedPermission;
-import com.duoduo.annotationpermission.annotation.OnGrantedPermission;
-import com.duoduo.annotationpermission.annotation.OnShowRationable;
+import com.duoduo.annotationpermission.library.annotation.AnnotationPermission;
+import com.duoduo.annotationpermission.library.annotation.NeedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnAlwaysDeniedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnDeniedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnGrantedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnShowRationable;
 import com.duoduo.annotationpermission.library.entity.AlwaysDeniedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.DeniedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.GrantedPermissionEntity;

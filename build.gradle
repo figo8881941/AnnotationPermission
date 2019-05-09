@@ -24,7 +24,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
     }
 
     //发布JCenter，如果moudle中的工具上有中文注释，需要加上
