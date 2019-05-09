@@ -1,1 +1,1 @@
-include ':simple', ':library', ':compiler'
+include ':simple', ':library'
