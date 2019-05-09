@@ -1,9 +1,9 @@
 package com.duoduo.annotationpermission.library.data;
 
-import com.duoduo.annotationpermission.annotation.OnAlwaysDeniedPermission;
-import com.duoduo.annotationpermission.annotation.OnDeniedPermission;
-import com.duoduo.annotationpermission.annotation.OnGrantedPermission;
-import com.duoduo.annotationpermission.annotation.OnShowRationable;
+import com.duoduo.annotationpermission.library.annotation.OnAlwaysDeniedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnDeniedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnGrantedPermission;
+import com.duoduo.annotationpermission.library.annotation.OnShowRationable;
 import com.duoduo.annotationpermission.library.entity.AlwaysDeniedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.DeniedPermissionEntity;
 import com.duoduo.annotationpermission.library.entity.GrantedPermissionEntity;
